@@ -13,7 +13,7 @@ Category.init(
       autoIncrement: true
     },
     category_name: {
-      id:DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false
 
     }
@@ -28,3 +28,10 @@ Category.init(
 );
 
 module.exports = Category;
+
+
+
+
+
+
+
