@@ -6,7 +6,14 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // get all products
 router.get('/', async (req, res) => {
   const products = await Product.findAll({
-    include: [{model: Category},{model: Tag, attributes: ['tag_name'], through: ProductTag, as: 'productTag_products'}]
+    include: [{
+      model: Category
+    },
+    {
+      model: Tag, 
+      attributes: ['tag_name'], 
+      through: ProductTag, 
+      as: 'productTag_products'}]
   });
   return res.status(200).json(products)
   // find all products
@@ -15,7 +22,7 @@ router.get('/', async (req, res) => {
 
 // get one product
 router.get('/:id', async (req, res) => {
-  const singleProduct = await Product.findByPl(req.params.id, {
+  const singleProduct = await Product.findByPk(req.params.id, {
     include: [{
       model: Category
     },

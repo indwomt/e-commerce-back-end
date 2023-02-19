@@ -26,7 +26,8 @@ Product.belongsToMany(Tag,{
 })
 
 Tag.belongsToMany(Product, {
-  as: 'productTage_products',
+  through: ProductTag,
+  as: 'productTag_products',
   forgeinKey: 'tag_id'
 })
 
