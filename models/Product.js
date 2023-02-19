@@ -17,13 +17,13 @@ Product.init(
     },
     product_name: {
       type:DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     price: {
       type:DataTypes.DECIMAL,
       allowNull:false,
       isDecimal: true,
-      allowNull: false,
+      allowNull: false
     },
     stock: {
       type:DataTypes.STRING,
