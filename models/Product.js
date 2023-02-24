@@ -26,7 +26,7 @@ Product.init(
       allowNull: false
     },
     stock: {
-      type:DataTypes.STRING,
+      type:DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 10,
       isNumeric: true

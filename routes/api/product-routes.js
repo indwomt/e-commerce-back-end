@@ -80,6 +80,9 @@ router.post('/', async (req, res) => {
     });
 });
 
+
+
+// WORKS////////////////////////////////////////////////////
 // update product
 router.put('/:id', (req, res) => {
   // update product data
