@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 
-
+// WORKS////////////////////////////////////////////////////////////////////////
 router.get('/:id', async (req, res) => {
   const singleCategory = await Category.findOne({
     where: {
