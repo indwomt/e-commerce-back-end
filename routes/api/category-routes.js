@@ -3,6 +3,8 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
+
+// WORKS////////////////////////////////////////////////////////////
 router.get('/', async (req, res) => {
   const allCategories = await Category.findAll({
     include: [{
@@ -15,6 +17,8 @@ router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
 });
+
+
 
 router.get('/:id', async (req, res) => {
   const singleCategory = await Category.findOne({
@@ -32,15 +36,50 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Products
 });
 
-router.post('/', (req, res) => {
+
+
+// WORKS///////////////////////////////////////////////////////////////////////////
+router.post('/', async (req, res) => {
   // create a new category
+    const categoryData = await Category.create(req.body);
+    res.status(200).json(categoryData);
 });
 
-router.put('/:id', (req, res) => {
+
+
+
+router.put('/:id', async  (req, res) => {
   // update a category by its `id` value
+  const updatedCategory = await 
+  Category.update(
+    {
+      id: req.body.id,
+      category_name: req.body.category_name
+    }
+  )
+  if(!updatedCategory){
+    res.status(404).json({message: 'no Categories found, could not update.'})
+  } else {
+    res.status(200).json(updatedCategory)
+  }
+
 });
 
-router.delete('/:id', (req, res) => {
+
+
+// WORKS//////////////
+router.delete('/:id', async (req, res) => {
+  try{
+    const dbDelete = await Category.destroy( {
+      where: {
+        id: req.params.id
+      }
+    })
+    if(!dbDelete){
+      res.status(404).json({message: `no Categories found by that id`})
+    }
+    res.status(200).json(dbDelete)
+  } catch (err){res.json(500).json(err)}
   // delete a category by its `id` value
 });
 
