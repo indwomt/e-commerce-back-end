@@ -33,40 +33,31 @@ router.post('/', async (req, res) => {
  res.status(200).json(tagData)
 });
 
-router.put('/:id', async (req, res) => {
-  const tagUpdate = await Tag.update(req.body, {
-    where: {
-      id: req.body.id
+router.put('/:id', (req, res) => {
+  // Calls the update method on the Book model
+  Tag.update(
+    {
+      // All the fields you can update and the data attached to the request body.
+      tag_name: req.body.tag_name
+    },
+    {
+      // Gets the books based on the isbn given in the request parameters
+      where: {
+        id: req.params.id,
+      },
     }
-  })
-  if(!tagData){
-    res.status(400).json({message: 'No Tags found with that ID'})
-  } else {
-    res.status(200).json(tagUpdate)
-  }
-  // update a tag's name by its `id` value
+  )
+    .then((updatedTag) => {
+      // Sends the updated book as a json response
+      res.json(updatedTag);
+    })
+    .catch((err) => res.json(err));
 });
 
-// router.delete('/:id', async (req, res) => {
-  
-//   try{
-//     const tagDelete = await Tag.destroy( {
-//       where: {
-//         id: req.params.id
-//       }
-//     })
-//     if(!tagDelete){
-//       res.status(404).json({
-//         message: `no Categories found by that id`
-//       }) 
-//     }else
-//     res.status(200).json(tagDelete)
-//   } catch (err){res.json(500).json(err)}
-//   // delete a category by its `id` value
-// });
 
 
 
+// WORKS////////////////////////////////////////////////
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
   Tag.destroy({
