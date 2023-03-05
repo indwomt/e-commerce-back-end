@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
       model: Tag, 
       attributes: ['tag_name'], 
       through: ProductTag, 
-      as: 'productTag_products'}]
+      as: 'tags'}]
   });
   return res.status(200).json(products)
   // find all products
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
     },
     {
       model: Tag, 
-      attributes: ['tag_name'], through: ProductTag, as: 'productTag_products'}]
+      attributes: ['tag_name'], through: ProductTag, as: 'tags'}]
   })
 
   return res.status(200).json(singleProduct)
